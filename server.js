@@ -1534,13 +1534,13 @@ io.on('connection', (socket) => {// --------- STORAGE SOLO MODE ----------
 
         if (!room) return;
 
-        if (!room.rematchRequests) {
-            room.rematchRequests = 0;
+        if (!room.rematchPlayers) {
+            room.rematchPlayers = new Set();
         }
 
-        room.rematchRequests++;
+        room.rematchPlayers.add(socket.id);
 
-        if (room.rematchRequests === 2) {
+        if (room.rematchPlayers.size >= 2) {
             // Reset stanza
             room.secretWords = {};
             room.hints = {};
@@ -1548,7 +1548,7 @@ io.on('connection', (socket) => {// --------- STORAGE SOLO MODE ----------
             room.ready = {};
             room.gameStarted = false;
             room.winner = null;
-            room.rematchRequests = 0;
+            room.rematchPlayers = new Set(); // Reset for next game
 
             io.to(roomCode).emit('duelloRematchStart', 'Nuova partita! Impostate le vostre parole.');
             console.log(`[DUELLO] Rematch nella stanza ${roomCode}`);

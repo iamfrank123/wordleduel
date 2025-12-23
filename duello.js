@@ -416,11 +416,11 @@ function submitGuess() {
 // ========== REMATCH ==========
 
 function createRematchButton() {
-    const existingBtn = document.getElementById('rematch-btn');
+    const existingBtn = document.getElementById('duello-rematch-btn');
     if (existingBtn) return;
 
     const rematchBtn = document.createElement('button');
-    rematchBtn.id = 'rematch-btn';
+    rematchBtn.id = 'duello-rematch-btn';
     rematchBtn.className = 'primary-btn';
     rematchBtn.innerHTML = '<span class="btn-icon">🔄</span> Rivincita';
     rematchBtn.style.marginTop = '20px';
