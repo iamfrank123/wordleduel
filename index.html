@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Multiplayer Guess The Word (Wordle)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="immagini/splash.png" alt="Wordle Multiplayer Logo" class="splash-logo">
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- ROTATE DEVICE MESSAGE (Mobile Portrait) -->
+    <div id="rotate-message">
+        <div class="rotate-content">
+            <div class="rotate-icon">↻</div>
+            <h2>Please Rotate Your Device</h2>
+            <p>This game is designed to be played in landscape mode.</p>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div id="app-container">
+
+        <!-- LOBBY -->
+        <div id="lobby-container">
+            <div class="lobby-header">
+                <h1>Wordle Multiplayer</h1>
+                <p class="subtitle">Challenge your friends or play solo!</p>
+            </div>
+
+            <div class="lobby-content">
+                <!-- Solo Section -->
+                <div class="game-mode-section solo-section">
+                    <h3>🎮 Solo Adventure</h3>
+                    <p class="mode-description">Gioca da solo contro il computer</p>
+                    <button id="solo-mode-btn" class="primary-btn pulse-anim">
+                        <span class="btn-icon">👤</span> Play Solo
+                    </button>
+                </div>
+
+                <!-- Duello a Parole Section -->
+                <div class="game-mode-section duello-section">
+                    <h3>⚔️ Duello a Parole</h3>
+                    <p class="mode-description">Sfida un amico con parole segrete!</p>
+
+                    <div class="duello-actions">
+                        <button id="create-duello-btn" class="secondary-btn">
+                            <span class="btn-icon">➕</span> Crea Duello
+                        </button>
+
+                        <div class="join-duello-container">
+                            <label for="duello-code-input">Codice Duello</label>
+                            <div class="room-code-wrapper">
+                                <input type="text" id="duello-code-input" placeholder="XXXX" maxlength="4">
+                                <button id="join-duello-btn" class="secondary-btn join-btn">Unisciti</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multiplayer Section -->
+                <div class="game-mode-section multiplayer-section">
+                    <h3>🌐 Multiplayer Arena</h3>
+                    <p class="mode-description">Sfida i tuoi amici online</p>
+
+                    <div class="input-group">
+                        <label for="languageSelect">Language</label>
+                        <select id="languageSelect">
+                            <option value="it">Italiano 🇮🇹</option>
+                            <option value="en">English 🇬🇧</option>
+                        </select>
+                    </div>
+
+                    <div class="multiplayer-actions">
+                        <button id="create-room-btn" class="secondary-btn">Create Room</button>
+
+                        <div class="join-room-container">
+                            <label for="room-code-input">Room Code</label>
+                            <div class="room-code-wrapper">
+                                <input type="text" id="room-code-input" placeholder="XXXX" maxlength="4">
+                                <button id="join-room-btn" class="secondary-btn join-btn">Join</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="lobby-message"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME CONTAINER -->
+        <div id="game-container" style="display: none;">
+            <div id="game-header">
+                <button id="back-to-lobby-btn" class="home-btn">
+                    <span class="btn-icon">🏠</span> HOME
+                </button>
+                <div id="game-status">
+                    <h3 id="player-turn">Waiting for opponent...</h3>
+                    <p id="game-message"></p>
+                </div>
+                <div id="turn-timer">Time: 45s</div>
+            </div>
+
+            <div id="grid-wrapper">
+                <div id="grid-container"></div>
+            </div>
+
+            <div id="keyboard-container"></div>
+        </div>
+
+    </div>
+
+    <!-- Custom Modal Overlay -->
+    <div id="game-modal-overlay" class="game-modal-overlay">
+        <div class="game-modal">
+            <h3 id="modal-title">Confirmation</h3>
+            <p id="modal-message">Are you sure?</p>
+            <div class="modal-buttons">
+                <button id="modal-confirm" class="modal-btn modal-btn-primary">Confirm</button>
+                <button id="modal-cancel" class="modal-btn modal-btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <script src="solo.js"></script>
+
+</body>
+
+</html>
